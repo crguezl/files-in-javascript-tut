@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>insertBefore</title>
+</head>
+<body>
+ 
+  <ul id="myList">
+      <li>Coffee</li>
+      <li>Tea</li>
+  </ul>
+  <p id="demo">Click the button to insert an item to the list</p>
+  <button onclick="myFunction()">Try it</button> 
+
+<script>
+  function myFunction() {
+    var linode=document.createElement("LI");
+    var textnode=document.createTextNode("Water");
+    linode.appendChild(textnode);
+
+    var list=document.getElementById("myList");
+    list.insertBefore(linode,list.childNodes[2]);
+  }
+</script>
+</body>
+</html>
