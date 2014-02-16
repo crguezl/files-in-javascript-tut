@@ -1,3 +1,25 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script type="text/html" id='usageList'>
+    <ul>
+      <% _.each(files, function(f) { %>
+        <li>
+            <strong><%- f.name %></strong> 
+            (<%= f.type || 'n/a' %>) 
+            - <%= f.size %> bytes,
+            last modified: 
+              <%= f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a' %>
+        </li>
+        <% }); %>
+    </ul>
+  </script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+</head>
+<body>
+  
 <input type="file" id="files" name="files[]" multiple />
 <output id="list"></output>
 
@@ -5,16 +27,11 @@
   function handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
 
-    // files is a FileList of File objects. List some properties.
-    var output = [];
-    for (var i = 0, f; f = files[i]; i++) {
-      output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
-                  f.size, ' bytes, last modified: ',
-                  f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
-                  '</li>');
-    }
-    document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+    var template = _.template(usageList.innerHTML);
+    document.getElementById('list').innerHTML = template({ files : files});
   }
 
   document.getElementById('files').addEventListener('change', handleFileSelect, false);
 </script>
+</body>
+</html>
