@@ -47,10 +47,10 @@
       function handleDragOver(evt) {
         evt.stopPropagation();
         evt.preventDefault();
-        evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+        evt.target.style.background = "purple";
       }
 
-      // Setup the dnd listeners.
+      // Setup the drag and drop listeners.
       var dropZone = document.getElementById('drop_zone');
       dropZone.addEventListener('dragover', handleDragOver, false);
       dropZone.addEventListener('drop', handleFileSelect, false);
