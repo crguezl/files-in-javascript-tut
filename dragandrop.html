@@ -12,8 +12,23 @@
         text-align: center;
       }
     </style>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+    <script type="text/html" id='usageList'>
+      <ul>
+        <% _.each(files, function(f) { %>
+          <li>
+              <strong><%- f.name %></strong> 
+              (<%= f.type || 'n/a' %>) 
+              - <%= f.size %> bytes,
+              last modified: 
+                <%= f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a' %>
+          </li>
+          <% }); %>
+      </ul>
+    </script>
   </head>
   <body>
+
     <div id="drop_zone">Drop files here</div>
     <output id="list"></output>
 
@@ -25,14 +40,8 @@
         var files = evt.dataTransfer.files; // FileList object.
 
         // files is a FileList of File objects. List some properties.
-        var output = [];
-        for (var i = 0, f; f = files[i]; i++) {
-          output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
-                      f.size, ' bytes, last modified: ',
-                      f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
-                      '</li>');
-        }
-        document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+        var template = _.template(usageList.innerHTML);
+        document.getElementById('list').innerHTML = template({ files : files});
       }
 
       function handleDragOver(evt) {
