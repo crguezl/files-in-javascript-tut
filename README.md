@@ -4,6 +4,7 @@
 * [File API specification](http://www.w3.org/TR/file-upload/)
 * [FileReader interface specification](http://www.w3.org/TR/file-upload/#dfn-filereader)
 * [repo</a>](https://github.com/crguezl/files-in-javascript-tut)/li>
+* [index.html](index.html)
 * [checkingapi.html](checkingapi.html)
 * [filelist.html](filelist.html)
 * [dragandrop.html](dragandrop.html)
