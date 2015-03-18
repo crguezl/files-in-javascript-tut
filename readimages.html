@@ -29,6 +29,8 @@
         var reader = new FileReader();
 
         // Closure to capture the file information.
+        // The handler receives as argument the event object but
+        // I want to also have access to the file object
         reader.onload = (function(theFile) {
           return function(e) {
             // Render thumbnail.
